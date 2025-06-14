@@ -1,5 +1,8 @@
 ---
 import "./src/styles/global.css";
+import IconAddToCart from "../assets/images/icon-add-to-cart.svg";
+import IllustrationEmptyCart from "../assets/images/illustration-empty-cart.svg";
+import data from "../content/products/data.json";
 ---
 
 <html lang="en">
@@ -12,6 +15,48 @@ import "./src/styles/global.css";
   </head>
 
   <body>
-    <h1 class="text-6xl text-red-600 hover:text-blue-700">Astro</h1>
+    <main class="bg-rose-50 py-8 text-rose-900">
+      <div class="container">
+        <header>
+          <h1 class="text-5xl font-bold text-rose-900">Desserts</h1>
+        </header>
+
+        <section class="mt-8 flex flex-col gap-8">
+          {
+            data.map((product) => (
+              <div>
+                <div class="relative h-[20vh] w-full rounded-xl bg-rose-400">
+                  <button
+                    class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-center gap-2 rounded-full border border-rose-500 bg-white py-3 font-semibold"
+                    type="button"
+                  >
+                    <IconAddToCart />
+                    Add to Cart
+                  </button>
+                </div>
+
+                <div class="mt-12 flex flex-col gap-1 font-semibold">
+                  <p class="text-sm text-rose-500">{product.category}</p>
+                  <p>{product.name}</p>
+                  <p class="text-red">${product.price}</p>
+                </div>
+              </div>
+            ))
+          }
+        </section>
+
+        <section class="mt-8 rounded-xl bg-white p-8">
+          <p class="text-3xl font-bold text-red">Your Cart (0)</p>
+
+          <div class="mt-12 flex flex-col items-center gap-6">
+            <IllustrationEmptyCart />
+
+            <p class="text-sm font-bold text-rose-400">
+              Your added items will appear here
+            </p>
+          </div>
+        </section>
+      </div>
+    </main>
   </body>
 </html>
