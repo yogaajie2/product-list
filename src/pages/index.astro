@@ -1,6 +1,8 @@
 ---
 import "./src/styles/global.css";
 import IconAddToCart from "../assets/images/icon-add-to-cart.svg";
+import IconDecrementQuantity from "../assets/images/icon-decrement-quantity.svg";
+import IconIncrementQuantity from "../assets/images/icon-increment-quantity.svg";
 import IllustrationEmptyCart from "../assets/images/illustration-empty-cart.svg";
 import data from "../content/products/data.json";
 ---
@@ -21,32 +23,49 @@ import data from "../content/products/data.json";
           <h1 class="text-5xl font-bold text-rose-900">Desserts</h1>
         </header>
 
-        <section class="mt-8 flex flex-col gap-8">
+        <section class="mt-8 flex flex-col gap-6">
           {
-            data.map((product) => (
+            data.map((product, index) => (
               <div>
-                <div class="relative h-[20vh] w-full rounded-xl bg-rose-400">
-                  <button
-                    class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-center gap-2 rounded-full border border-rose-500 bg-white py-3 font-semibold"
-                    type="button"
-                  >
-                    <IconAddToCart />
-                    Add to Cart
-                  </button>
+                <div
+                  class={`relative h-[20vh] w-full rounded-xl border-2 bg-rose-400 ${index === 1 ? "border-red" : "border-transparent"}`}
+                >
+                  {index === 1 ? (
+                    <button
+                      class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-between gap-2 rounded-full bg-red px-2 py-3 text-xs text-white transition-colors"
+                      type="button"
+                    >
+                      <div class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red">
+                        <IconDecrementQuantity stroke="currentColor" />
+                      </div>
+                      1
+                      <div class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red">
+                        <IconIncrementQuantity stroke="currentColor" />
+                      </div>
+                    </button>
+                  ) : (
+                    <button
+                      class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-center gap-2 rounded-full border border-rose-500 bg-white py-3 font-semibold transition-colors hover:border-red hover:text-red"
+                      type="button"
+                    >
+                      <IconAddToCart />
+                      Add to Cart
+                    </button>
+                  )}
                 </div>
 
-                <div class="mt-12 flex flex-col gap-1 font-semibold">
-                  <p class="text-sm text-rose-500">{product.category}</p>
-                  <p>{product.name}</p>
-                  <p class="text-red">${product.price}</p>
+                <div class="mt-12 flex flex-col gap-1">
+                  <p class="text-sm text-rose-400">{product.category}</p>
+                  <p class="font-semibold">{product.name}</p>
+                  <p class="price font-semibold text-red">${product.price}</p>
                 </div>
               </div>
             ))
           }
         </section>
 
-        <section class="mt-8 rounded-xl bg-white p-8">
-          <p class="text-3xl font-bold text-red">Your Cart (0)</p>
+        <section class="mt-8 rounded-xl bg-white p-6">
+          <p class="text-3xl font-bold text-red">Your Cart (1)</p>
 
           <div class="mt-12 flex flex-col items-center gap-6">
             <IllustrationEmptyCart />
