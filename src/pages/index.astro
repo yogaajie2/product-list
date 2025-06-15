@@ -1,8 +1,10 @@
 ---
 import "./src/styles/global.css";
 import IconAddToCart from "../assets/images/icon-add-to-cart.svg";
+import IconCarbonNeutral from "../assets/images/icon-carbon-neutral.svg";
 import IconDecrementQuantity from "../assets/images/icon-decrement-quantity.svg";
 import IconIncrementQuantity from "../assets/images/icon-increment-quantity.svg";
+import IconRemoveItem from "../assets/images/icon-remove-item.svg";
 import IllustrationEmptyCart from "../assets/images/illustration-empty-cart.svg";
 import data from "../content/products/data.json";
 ---
@@ -67,13 +69,51 @@ import data from "../content/products/data.json";
         <section class="mt-8 rounded-xl bg-white p-6">
           <p class="text-3xl font-bold text-red">Your Cart (1)</p>
 
-          <div class="mt-12 flex flex-col items-center gap-6">
+          <!-- <div class="mt-12 flex flex-col items-center gap-6">
             <IllustrationEmptyCart />
 
             <p class="text-sm font-bold text-rose-400">
               Your added items will appear here
             </p>
+          </div> -->
+
+          <div class="mt-4">
+            <div class="relative border-b border-rose-100 py-4">
+              <p class="font-semibold">Classic Tiramisu</p>
+
+              <div class="mt-2 flex items-center">
+                <p class="font-semibold text-red">1x</p>
+                <p class="ml-4 text-rose-400">@ $5.5</p>
+                <p class="ml-2 font-semibold text-rose-500">$5.5</p>
+              </div>
+
+              <button
+                class="absolute top-1/2 right-0 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border border-rose-400 p-1 text-rose-400 transition-colors"
+                type="button"
+              >
+                <IconRemoveItem stroke="currentColor" />
+              </button>
+            </div>
           </div>
+
+          <div class="mt-8 flex items-center justify-between">
+            <p>Order Total</p>
+            <p class="text-2xl font-bold">$46.5</p>
+          </div>
+
+          <div
+            class="mt-8 flex w-full items-center gap-4 rounded-xl bg-rose-50 p-4 text-center"
+          >
+            <IconCarbonNeutral />
+            <p>This is a <strong>carbon-neutral</strong> delivery</p>
+          </div>
+
+          <button
+            class="mt-8 flex w-full justify-center rounded-full bg-red py-4 text-white"
+            type="button"
+          >
+            Confirm Order
+          </button>
         </section>
       </div>
     </main>
