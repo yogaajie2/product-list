@@ -13,6 +13,7 @@
 
 @theme {
   --color-*: initial;
+  --color-black: hsl(0, 0%, 0%);
   --color-green: hsl(159, 69%, 38%);
   --color-red: hsl(14, 86%, 42%);
   --color-white: hsl(0, 0%, 100%);
