@@ -24,7 +24,7 @@ const Main = () => {
                 >
                   {index === 1 ? (
                     <button
-                      class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-between gap-2 rounded-full bg-red px-2 py-3 text-xs text-white transition-colors"
+                      class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-between gap-2 rounded-full bg-red px-2 py-3 text-sm text-white transition-colors"
                       type="button"
                     >
                       <div class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red">
