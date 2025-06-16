@@ -531,6 +531,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fontsource-variable/red-hat-text@npm:^5.2.6":
+  version: 5.2.6
+  resolution: "@fontsource-variable/red-hat-text@npm:5.2.6"
+  checksum: 10c0/c0d699a503c120280a0c216246e72e7bf1a83519c77264696ebc2d2dcc0421df6c75be104a6626d9f3095900d22f27bfb7e210baf968b255f20c55237bc481a6
+  languageName: node
+  linkType: hard
+
 "@img/sharp-darwin-arm64@npm:0.33.5":
   version: 0.33.5
   resolution: "@img/sharp-darwin-arm64@npm:0.33.5"
@@ -4279,6 +4286,7 @@ __metadata:
   resolution: "product-list@workspace:."
   dependencies:
     "@astrojs/preact": "npm:^4.1.0"
+    "@fontsource-variable/red-hat-text": "npm:^5.2.6"
     "@tailwindcss/vite": "npm:^4.1.10"
     astro: "npm:^5.9.3"
     preact: "npm:^10.26.9"

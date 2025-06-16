@@ -25,7 +25,7 @@
   --color-rose-500: hsl(12, 20%, 44%);
   --color-rose-900: hsl(14, 65%, 9%);
 
-  /* --font-sans: "Noto Sans Variable", "sans-serif"; */
+  --font-sans: "Red Hat Text Variable", "sans-serif";
 }
 
 @utility container {
