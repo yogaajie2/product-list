@@ -16,12 +16,16 @@ const Main = () => {
             <h1 class="text-5xl font-bold">Desserts</h1>
           </header>
 
-          <section class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <section class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
             {data.map((product, index) => (
               <div>
-                <div
-                  class={`relative h-[20vh] w-full rounded-xl border-2 bg-rose-400 lg:h-[25vh] ${index === 1 ? "border-red" : "border-transparent"}`}
-                >
+                <div class="relative">
+                  <img
+                    class={`h-[20vh] w-full rounded-xl border-2 object-cover lg:h-[25vh] ${index === 1 ? "border-red" : "border-transparent"}`}
+                    src={product.image.desktop}
+                    alt={product.name}
+                  />
+
                   {index === 1 ? (
                     <button
                       class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-between gap-2 rounded-full bg-red px-2 py-3 text-sm text-white transition-colors"
@@ -107,9 +111,7 @@ const Main = () => {
           </button>
         </section>
 
-        {/* <section
-          class="fixed top-0 left-0 flex h-screen w-screen items-end bg-black/50 pt-40 backdrop-opacity-25 md:items-center md:justify-center md:pt-0"
-        >
+        <section class="fixed top-0 left-0 flex h-screen w-screen items-end bg-black/50 pt-40 backdrop-opacity-25 md:items-center md:justify-center md:pt-0">
           <div class="rounded-xl bg-white px-6 py-8">
             <header>
               <IconOrderConfirmed />
@@ -118,10 +120,12 @@ const Main = () => {
             </header>
 
             <div class="mt-8 rounded-xl bg-rose-50 p-6 lg:min-w-[40vw]">
-              <div
-                class="relative flex items-center border-b border-rose-100 py-4 first:pt-0"
-              >
-                <div class="relative h-14 w-14 rounded bg-rose-400"></div>
+              <div class="relative flex items-center border-b border-rose-100 py-4 first:pt-0">
+                <img
+                  class="h-14 w-14 rounded bg-rose-400"
+                  src="/images/image-tiramisu-thumbnail.jpg"
+                  alt="Classic Tiramisu"
+                />
 
                 <div class="ml-4">
                   <p class="font-semibold">Classic Tiramisu</p>
@@ -150,7 +154,7 @@ const Main = () => {
               </button>
             </footer>
           </div>
-        </section> */}
+        </section>
       </div>
     </main>
   );
