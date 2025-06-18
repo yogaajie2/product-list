@@ -1,12 +1,24 @@
-<script setup>
-import IconAddToCart from "../assets/images/icon-add-to-cart.svg?component";
+<script setup lang="ts">
+import { reactive } from "vue";
+import Product from "./Product.vue";
 import IconCarbonNeutral from "../assets/images/icon-carbon-neutral.svg?component";
-import IconDecrementQuantity from "../assets/images/icon-decrement-quantity.svg?component";
-import IconIncrementQuantity from "../assets/images/icon-increment-quantity.svg?component";
 import IconOrderConfirmed from "../assets/images/icon-order-confirmed.svg?component";
 import IconRemoveItem from "../assets/images/icon-remove-item.svg?component";
 import IllustrationEmptyCart from "../assets/images/illustration-empty-cart.svg?component";
 import data from "../content/products/data.json";
+
+interface CartItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+type Cart = CartItem[];
+const cart: Cart = reactive([]);
+
+function addToCart(item: CartItem) {
+  cart.push(item);
+}
 </script>
 
 <template>
@@ -18,40 +30,19 @@ import data from "../content/products/data.json";
         </header>
 
         <section class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-          <div v-for="(product, index) in data">
-            <div class="relative">
-              <img class="h-[20vh] w-full rounded-xl border-2 object-cover lg:h-[25vh]"
-                :class="index === 1 ? 'border-red' : 'border-transparent'" :alt=product.name
-                :src=product.image.desktop />
-
-              <button
-                class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-between gap-2 rounded-full bg-red px-2 py-3 text-sm text-white transition-colors"
-                type="button" v-if="index === 1">
-                <div
-                  class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red">
-                  <IconDecrementQuantity stroke="currentColor" />
-                </div>
-                1
-                <div
-                  class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red">
-                  <IconIncrementQuantity stroke="currentColor" />
-                </div>
-              </button>
-
-              <button
-                class="absolute -bottom-6 left-1/2 flex min-w-[60%] -translate-x-1/2 items-center justify-center gap-2 rounded-full border border-rose-500 bg-white py-3 font-semibold transition-colors hover:border-red hover:text-red"
-                type="button" v-else>
-                <IconAddToCart />
-                Add to Cart
-              </button>
-            </div>
-
-            <div class="mt-12 flex flex-col gap-1">
-              <p class="text-sm text-rose-400">{{ product.category }}</p>
-              <p class="font-semibold">{{ product.name }}</p>
-              <p class="price font-semibold text-red">${{ product.price }}</p>
-            </div>
-          </div>
+          <Product
+            v-for="(product, index) in data"
+            :index="index"
+            :key="index"
+            :product="product"
+            @add-to-cart="
+              addToCart({
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+              })
+            "
+          />
         </section>
       </section>
 
@@ -78,7 +69,8 @@ import data from "../content/products/data.json";
 
             <button
               class="absolute top-1/2 right-0 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border border-rose-400 p-1 text-rose-400 transition-colors hover:border-rose-900 hover:text-rose-900"
-              type="button">
+              type="button"
+            >
               <IconRemoveItem stroke="currentColor" />
             </button>
           </div>
@@ -89,22 +81,23 @@ import data from "../content/products/data.json";
           <p class="text-2xl font-bold">$46.5</p>
         </div>
 
-        <div class="mt-8 flex w-full items-center gap-4 rounded-xl bg-rose-50 p-4 text-center">
+        <div
+          class="mt-8 flex w-full items-center gap-4 rounded-xl bg-rose-50 p-4 text-center"
+        >
           <IconCarbonNeutral />
 
-          <p>
-            This is a <strong>carbon-neutral</strong> delivery
-          </p>
+          <p>This is a <strong>carbon-neutral</strong> delivery</p>
         </div>
 
         <button
           class="mt-8 flex w-full justify-center rounded-full bg-red py-4 text-white transition hover:saturate-[0.75]"
-          type="button">
+          type="button"
+        >
           Confirm Order
         </button>
       </section>
 
-      <section
+      <!-- <section
         class="fixed top-0 left-0 flex h-screen w-screen items-end bg-black/50 pt-40 backdrop-opacity-25 md:items-center md:justify-center md:pt-0">
         <div class="rounded-xl bg-white px-6 py-8">
           <header>
@@ -144,7 +137,7 @@ import data from "../content/products/data.json";
             </button>
           </footer>
         </div>
-      </section>
+      </section> -->
     </div>
   </main>
 </template>
