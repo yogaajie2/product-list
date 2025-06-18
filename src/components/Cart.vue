@@ -53,6 +53,7 @@ const orderTotal = computed(() => {
           <button
             class="absolute top-1/2 right-0 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border border-rose-400 p-1 text-rose-400 transition-colors hover:border-rose-900 hover:text-rose-900"
             type="button"
+            @click="$emit('removeFromCart', item.name)"
           >
             <IconRemoveItem stroke="currentColor" />
           </button>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { ref } from "vue";
 import Cart from "./Cart.vue";
 import Product from "./Product.vue";
 import IconOrderConfirmed from "../assets/images/icon-order-confirmed.svg?component";
@@ -7,10 +7,14 @@ import data from "../content/products/data.json";
 import type { CartItem } from "../types";
 
 type Cart = CartItem[];
-const cart: Cart = reactive([]);
+const cart = ref<Cart>([]);
 
 function addToCart(item: CartItem) {
-  cart.push(item);
+  cart.value.push(item);
+}
+
+function removeFromCart(itemName: string) {
+  cart.value = cart.value.filter((item) => item.name !== itemName);
 }
 </script>
 
@@ -40,7 +44,7 @@ function addToCart(item: CartItem) {
         </section>
       </section>
 
-      <Cart :items="cart" />
+      <Cart :items="cart" @remove-from-cart="removeFromCart" />
 
       <!-- <section
         class="fixed top-0 left-0 flex h-screen w-screen items-end bg-black/50 pt-40 backdrop-opacity-25 md:items-center md:justify-center md:pt-0">
