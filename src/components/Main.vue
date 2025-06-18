@@ -1,17 +1,10 @@
 <script setup lang="ts">
 import { reactive } from "vue";
+import Cart from "./Cart.vue";
 import Product from "./Product.vue";
-import IconCarbonNeutral from "../assets/images/icon-carbon-neutral.svg?component";
 import IconOrderConfirmed from "../assets/images/icon-order-confirmed.svg?component";
-import IconRemoveItem from "../assets/images/icon-remove-item.svg?component";
-import IllustrationEmptyCart from "../assets/images/illustration-empty-cart.svg?component";
 import data from "../content/products/data.json";
-
-interface CartItem {
-  name: string;
-  price: number;
-  quantity: number;
-}
+import type { CartItem } from "../types";
 
 type Cart = CartItem[];
 const cart: Cart = reactive([]);
@@ -46,56 +39,7 @@ function addToCart(item: CartItem) {
         </section>
       </section>
 
-      <section class="mt-8 rounded-xl bg-white p-6 lg:mt-0 lg:h-fit lg:w-1/3">
-        <p class="text-3xl font-bold text-red">Your Cart (1)</p>
-
-        <!-- <div class="mt-12 flex flex-col items-center gap-6">
-          <IllustrationEmptyCart />
-
-          <p class="text-sm font-bold text-rose-400">
-            Your added items will appear here
-          </p>
-        </div> -->
-
-        <div class="mt-4">
-          <div class="relative border-b border-rose-100 py-4">
-            <p class="font-semibold">Classic Tiramisu</p>
-
-            <div class="mt-2 flex items-center">
-              <p class="font-semibold text-red">1x</p>
-              <p class="ml-4 text-rose-400">@ $5.5</p>
-              <p class="ml-2 font-semibold text-rose-500">$5.5</p>
-            </div>
-
-            <button
-              class="absolute top-1/2 right-0 flex h-5 w-5 -translate-y-1/2 items-center justify-center rounded-full border border-rose-400 p-1 text-rose-400 transition-colors hover:border-rose-900 hover:text-rose-900"
-              type="button"
-            >
-              <IconRemoveItem stroke="currentColor" />
-            </button>
-          </div>
-        </div>
-
-        <div class="mt-8 flex items-center justify-between">
-          <p>Order Total</p>
-          <p class="text-2xl font-bold">$46.5</p>
-        </div>
-
-        <div
-          class="mt-8 flex w-full items-center gap-4 rounded-xl bg-rose-50 p-4 text-center"
-        >
-          <IconCarbonNeutral />
-
-          <p>This is a <strong>carbon-neutral</strong> delivery</p>
-        </div>
-
-        <button
-          class="mt-8 flex w-full justify-center rounded-full bg-red py-4 text-white transition hover:saturate-[0.75]"
-          type="button"
-        >
-          Confirm Order
-        </button>
-      </section>
+      <Cart :items="cart" />
 
       <!-- <section
         class="fixed top-0 left-0 flex h-screen w-screen items-end bg-black/50 pt-40 backdrop-opacity-25 md:items-center md:justify-center md:pt-0">
