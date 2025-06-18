@@ -1,4 +1,11 @@
 <script setup>
+import IconAddToCart from "../assets/images/icon-add-to-cart.svg?component";
+import IconCarbonNeutral from "../assets/images/icon-carbon-neutral.svg?component";
+import IconDecrementQuantity from "../assets/images/icon-decrement-quantity.svg?component";
+import IconIncrementQuantity from "../assets/images/icon-increment-quantity.svg?component";
+import IconOrderConfirmed from "../assets/images/icon-order-confirmed.svg?component";
+import IconRemoveItem from "../assets/images/icon-remove-item.svg?component";
+import IllustrationEmptyCart from "../assets/images/illustration-empty-cart.svg?component";
 import data from "../content/products/data.json";
 </script>
 
