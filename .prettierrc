@@ -9,14 +9,19 @@
     },
 
     {
-      "files": "*.tsx",
+      "files": "*.vue",
 
       "options": {
-        "parser": "typescript"
+        "parser": "vue"
       }
     }
   ],
 
-  "plugins": ["prettier-plugin-astro", "prettier-plugin-tailwindcss"],
+  "plugins": [
+    "prettier-plugin-astro",
+    "prettier-plugin-vue",
+    "prettier-plugin-tailwindcss"
+  ],
+
   "tailwindStylesheet": "./src/styles/global.css"
 }
