@@ -25,6 +25,7 @@ function addToCart(item: CartItem) {
         <section class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
           <Product
             v-for="(product, index) in data"
+            :cart="cart"
             :index="index"
             :key="index"
             :product="product"
