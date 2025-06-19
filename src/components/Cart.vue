@@ -11,10 +11,12 @@ const props = defineProps<{
 }>();
 
 const orderTotal = computed(() => {
-  return props.items.reduce(
-    (accumulator, currentValue) =>
-      accumulator + currentValue.price * currentValue.quantity,
-    0,
+  return formatter.format(
+    props.items.reduce(
+      (accumulator, currentValue) =>
+        accumulator + currentValue.price * currentValue.quantity,
+      0,
+    ),
   );
 });
 
@@ -79,7 +81,7 @@ function countItemTotal(price: number, quantity: number) {
 
       <div class="mt-8 flex items-center justify-between">
         <p>Order Total</p>
-        <p class="text-2xl font-bold">{{ formatter.format(orderTotal) }}</p>
+        <p class="text-2xl font-bold">{{ orderTotal }}</p>
       </div>
 
       <div
@@ -93,6 +95,7 @@ function countItemTotal(price: number, quantity: number) {
       <button
         class="mt-8 flex w-full justify-center rounded-full bg-red py-4 text-white transition hover:saturate-[0.75]"
         type="button"
+        @click="$emit('confirmOrder')"
       >
         Confirm Order
       </button>
