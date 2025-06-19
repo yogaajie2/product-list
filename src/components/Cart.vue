@@ -16,6 +16,10 @@ const orderTotal = computed(() => {
     0,
   );
 });
+
+function countItemTotal(price: number, quantity: number) {
+  return formatter.format(price * quantity);
+}
 </script>
 
 <template>
@@ -46,7 +50,7 @@ const orderTotal = computed(() => {
             </p>
 
             <p class="ml-2 font-semibold text-rose-500">
-              {{ formatter.format(item.price) }}
+              {{ countItemTotal(item.price, item.quantity) }}
             </p>
           </div>
 
