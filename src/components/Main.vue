@@ -9,30 +9,39 @@ import type { CartItem } from "../types";
 type Cart = CartItem[];
 const cart = ref<Cart>([]);
 
-function addToCart(item: CartItem) {
+function updateCart(item: CartItem, operation: "add" | "decrease" | "remove") {
   const index = cart.value.findIndex((cartItem) => cartItem.name === item.name);
 
-  if (index !== -1) {
-    cart.value[index].quantity++;
-  } else {
-    cart.value.push(item);
+  switch (operation) {
+    case "add":
+      if (index !== -1) {
+        cart.value[index].quantity++;
+      } else {
+        cart.value.push(item);
+      }
+
+      break;
+
+    case "decrease":
+      if (index !== -1) {
+        if (cart.value[index].quantity === 1) {
+          cart.value = cart.value.filter(
+            (cartItem) => cartItem.name !== item.name,
+          );
+        } else {
+          cart.value[index].quantity--;
+        }
+      }
+
+      break;
+
+    case "remove":
+      cart.value = cart.value.filter((cartItem) => cartItem.name !== item.name);
+      break;
+
+    default:
+      break;
   }
-}
-
-function decreaseQuantity(name: string) {
-  const index = cart.value.findIndex((cartItem) => cartItem.name === name);
-
-  if (index !== -1) {
-    if (cart.value[index].quantity === 1) {
-      removeFromCart(name);
-    } else {
-      cart.value[index].quantity--;
-    }
-  }
-}
-
-function removeFromCart(itemName: string) {
-  cart.value = cart.value.filter((item) => item.name !== itemName);
 }
 </script>
 
@@ -51,19 +60,12 @@ function removeFromCart(itemName: string) {
             :index="index"
             :key="index"
             :product="product"
-            @add-to-cart="
-              addToCart({
-                name: product.name,
-                price: product.price,
-                quantity: 1,
-              })
-            "
-            @decrease-quantity="decreaseQuantity(product.name)"
+            @update-cart="updateCart"
           />
         </section>
       </section>
 
-      <Cart :items="cart" @remove-from-cart="removeFromCart" />
+      <Cart :items="cart" @update-cart="updateCart" />
 
       <!-- <section
         class="fixed top-0 left-0 flex h-screen w-screen items-end bg-black/50 pt-40 backdrop-opacity-25 md:items-center md:justify-center md:pt-0">

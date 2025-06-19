@@ -48,7 +48,19 @@ const itemQuantity = computed(() => {
       >
         <div
           class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red"
-          @click="$emit('decreaseQuantity')"
+          @click="
+            $emit(
+              'updateCart',
+
+              {
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+              },
+
+              'decrease',
+            )
+          "
         >
           <IconDecrementQuantity stroke="currentColor" />
         </div>
@@ -57,7 +69,19 @@ const itemQuantity = computed(() => {
 
         <div
           class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red"
-          @click="$emit('addToCart')"
+          @click="
+            $emit(
+              'updateCart',
+
+              {
+                name: product.name,
+                price: product.price,
+                quantity: 1,
+              },
+
+              'add',
+            )
+          "
         >
           <IconIncrementQuantity stroke="currentColor" />
         </div>
@@ -67,7 +91,19 @@ const itemQuantity = computed(() => {
         v-else
         class="absolute -bottom-6 left-1/2 flex min-h-[50px] min-w-[60%] -translate-x-1/2 items-center justify-center gap-2 rounded-full border border-rose-500 bg-white py-3 font-semibold transition-colors hover:border-red hover:text-red"
         type="button"
-        @click="$emit('addToCart')"
+        @click="
+          $emit(
+            'updateCart',
+
+            {
+              name: product.name,
+              price: product.price,
+              quantity: 1,
+            },
+
+            'add',
+          )
+        "
       >
         <IconAddToCart />
         Add to Cart
