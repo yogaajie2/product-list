@@ -12,7 +12,8 @@ const props = defineProps<{
 
 const orderTotal = computed(() => {
   return props.items.reduce(
-    (accumulator, currentValue) => accumulator + currentValue.price,
+    (accumulator, currentValue) =>
+      accumulator + currentValue.price * currentValue.quantity,
     0,
   );
 });
