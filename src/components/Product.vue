@@ -21,6 +21,14 @@ const props = defineProps<{
 const isItemInCart = computed(() => {
   return props.cart.some((item) => item.name === props.product.name);
 });
+
+const itemQuantity = computed(() => {
+  const index = props.cart.findIndex(
+    (item) => item.name === props.product.name,
+  );
+
+  return props.cart[index].quantity;
+});
 </script>
 
 <template>
@@ -45,7 +53,7 @@ const isItemInCart = computed(() => {
           <IconDecrementQuantity stroke="currentColor" />
         </div>
 
-        1
+        {{ itemQuantity }}
 
         <div
           class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red"
