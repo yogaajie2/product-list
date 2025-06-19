@@ -77,11 +77,20 @@ function updateCart(item: CartItem, operation: "add" | "decrease" | "remove") {
         @confirm-order="isOrderConfirmationShown = true"
       />
 
-      <OrderConfirmation
-        v-show="isOrderConfirmationShown"
-        :cart="cart"
-        @start-new-order="startNewOrder"
-      />
+      <Transition
+        enter-active-class="transition-opacity duration-200"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-opacity duration-200"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <OrderConfirmation
+          v-if="isOrderConfirmationShown"
+          :cart="cart"
+          @start-new-order="startNewOrder"
+        />
+      </Transition>
     </div>
   </main>
 </template>
