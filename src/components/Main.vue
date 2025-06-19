@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import Cart from "./Cart.vue";
 import OrderConfirmation from "./OrderConfirmation.vue";
 import Product from "./Product.vue";
@@ -8,7 +8,20 @@ import type { CartItem } from "../types";
 
 type Cart = CartItem[];
 const cart = ref<Cart>([]);
+const isCartShown = ref(false);
+const isDesktop = ref(false);
 const isOrderConfirmationShown = ref(false);
+const shouldCartShow = computed(() => isDesktop.value || isCartShown.value);
+
+onMounted(() => {
+  const checkScreen = () => {
+    isDesktop.value = window.innerWidth >= 1024; // Tailwind's lg breakpoint
+  };
+
+  checkScreen();
+  window.addEventListener("resize", checkScreen);
+  onUnmounted(() => window.removeEventListener("resize", checkScreen));
+});
 
 function startNewOrder() {
   cart.value = [];
@@ -71,11 +84,39 @@ function updateCart(item: CartItem, operation: "add" | "decrease" | "remove") {
         </section>
       </section>
 
-      <Cart
-        :items="cart"
-        @update-cart="updateCart"
-        @confirm-order="isOrderConfirmationShown = true"
-      />
+      <button
+        class="fixed bottom-4 left-1/2 z-10 flex w-1/2 -translate-x-1/2 justify-center rounded-full border-2 py-4 font-semibold shadow-xl transition hover:saturate-[0.75] lg:hidden"
+        :class="
+          isCartShown
+            ? 'border-red bg-white text-red'
+            : 'border-transparent bg-red text-white'
+        "
+        type="button"
+        @click="isCartShown = !isCartShown"
+      >
+        {{ isCartShown ? "Hide Cart" : "Show Cart" }}
+      </button>
+
+      <Transition
+        enter-active-class="transition-opacity duration-200"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition-opacity duration-200"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <Cart
+          v-if="shouldCartShow"
+          :items="cart"
+          @update-cart="updateCart"
+          @confirm-order="
+            {
+              isCartShown = false;
+              isOrderConfirmationShown = true;
+            }
+          "
+        />
+      </Transition>
 
       <Transition
         enter-active-class="transition-opacity duration-200"
