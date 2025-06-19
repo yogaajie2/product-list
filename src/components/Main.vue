@@ -10,7 +10,13 @@ type Cart = CartItem[];
 const cart = ref<Cart>([]);
 
 function addToCart(item: CartItem) {
-  cart.value.push(item);
+  const index = cart.value.findIndex((cartItem) => cartItem.name === item.name);
+
+  if (index !== -1) {
+    cart.value[index].quantity++;
+  } else {
+    cart.value.push(item);
+  }
 }
 
 function removeFromCart(itemName: string) {
