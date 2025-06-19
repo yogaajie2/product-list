@@ -19,6 +19,18 @@ function addToCart(item: CartItem) {
   }
 }
 
+function decreaseQuantity(name: string) {
+  const index = cart.value.findIndex((cartItem) => cartItem.name === name);
+
+  if (index !== -1) {
+    if (cart.value[index].quantity === 1) {
+      removeFromCart(name);
+    } else {
+      cart.value[index].quantity--;
+    }
+  }
+}
+
 function removeFromCart(itemName: string) {
   cart.value = cart.value.filter((item) => item.name !== itemName);
 }
@@ -46,6 +58,7 @@ function removeFromCart(itemName: string) {
                 quantity: 1,
               })
             "
+            @decrease-quantity="decreaseQuantity(product.name)"
           />
         </section>
       </section>

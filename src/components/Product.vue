@@ -40,6 +40,7 @@ const isItemInCart = computed(() => {
       >
         <div
           class="flex h-5 w-5 items-center justify-center rounded-full border border-white p-1 transition-colors hover:bg-white hover:text-red"
+          @click="$emit('decreaseQuantity')"
         >
           <IconDecrementQuantity stroke="currentColor" />
         </div>
