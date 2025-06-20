@@ -94,7 +94,7 @@ function updateCart(item: CartItem, operation: "add" | "decrease" | "remove") {
         type="button"
         @click="isCartShown = !isCartShown"
       >
-        {{ isCartShown ? "Hide Cart" : "Show Cart" }}
+        {{ isCartShown ? "Hide Cart" : "View Cart" }}
       </button>
 
       <Transition
